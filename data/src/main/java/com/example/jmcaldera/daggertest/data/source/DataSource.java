@@ -14,7 +14,7 @@ public interface DataSource {
 
         void onSuccess(List<CharacterEntity> charactersList);
 
-        void onError();
+        void onError(Throwable error);
     }
 
     void getCharactersEntity(LoadCharactersCallback callback);

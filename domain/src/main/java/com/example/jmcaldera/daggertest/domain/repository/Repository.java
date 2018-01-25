@@ -13,7 +13,7 @@ public interface Repository {
     interface LoadCharactersCallback {
         void onSuccess(List<Character> characters);
 
-        void onError();
+        void onError(Throwable error);
     }
 
     void getCharacters(LoadCharactersCallback callback);

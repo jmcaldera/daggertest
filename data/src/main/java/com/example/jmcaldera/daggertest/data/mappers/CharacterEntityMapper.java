@@ -4,6 +4,7 @@ import com.example.jmcaldera.daggertest.data.model.CharacterEntity;
 import com.example.jmcaldera.daggertest.domain.mappers.Mapper;
 import com.example.jmcaldera.daggertest.domain.model.Character;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
@@ -12,10 +13,15 @@ import javax.inject.Singleton;
  * domain layer
  */
 
-@Singleton
 public class CharacterEntityMapper implements Mapper<CharacterEntity, Character> {
 
-    private static final AbilitiesEntityMapper ABILITIES_MAPPER = new AbilitiesEntityMapper();
+//    private static final AbilitiesEntityMapper ABILITIES_MAPPER = new AbilitiesEntityMapper();
+    private  AbilitiesEntityMapper mAbilitiesMapper;
+
+    @Inject
+    public CharacterEntityMapper(AbilitiesEntityMapper abilitiesEntityMapper) {
+        this.mAbilitiesMapper = abilitiesEntityMapper;
+    }
 
     @Override
     public Character map(CharacterEntity model) {
@@ -28,7 +34,7 @@ public class CharacterEntityMapper implements Mapper<CharacterEntity, Character>
                 .setName(model.getName())
                 .setPhoto(model.getPhoto())
                 .setDescription(model.getDescription())
-                .setAbilities(ABILITIES_MAPPER.map(model.getAbilities()))
+                .setAbilities(mAbilitiesMapper.map(model.getAbilities()))
                 .build();
 
     }

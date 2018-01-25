@@ -1,5 +1,7 @@
 package com.example.jmcaldera.daggertest.data;
 
+import android.support.annotation.NonNull;
+
 import com.example.jmcaldera.daggertest.data.mappers.CharactersEntityListMapper;
 import com.example.jmcaldera.daggertest.data.model.CharacterEntity;
 import com.example.jmcaldera.daggertest.data.source.DataSource;
@@ -22,7 +24,7 @@ public class CharactersRepository implements Repository {
     private CharactersEntityListMapper mListMapper;
 
     @Inject
-    public CharactersRepository(DataSource localDataSource, CharactersEntityListMapper listMapper) {
+    public CharactersRepository(@NonNull DataSource localDataSource, @NonNull CharactersEntityListMapper listMapper) {
         this.mLocalDataSource = localDataSource;
         this.mListMapper = listMapper;
     }
@@ -37,8 +39,8 @@ public class CharactersRepository implements Repository {
             }
 
             @Override
-            public void onError() {
-                callback.onError();
+            public void onError(Throwable error) {
+                callback.onError(error);
             }
         });
     }
